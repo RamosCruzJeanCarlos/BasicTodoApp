@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<String> items;
-    private ArrayAdapter<String> itemsAdapter;
+    private ItemAdapter itemsAdapter;
     private ListView lvItems;
 
     @Override
@@ -29,10 +29,8 @@ public class MainActivity extends AppCompatActivity {
         lvItems = (ListView) findViewById(R.id.lvItems);
         items =  new ArrayList<String>();
         readItems();
-        itemsAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,items);
+        itemsAdapter = new ItemAdapter(this,items);
         lvItems.setAdapter(itemsAdapter);
-        items.add("1er item");
-        items.add("2do item");
 
         setUpViewListener();
     }
@@ -54,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         String message = etNewItem.getText().toString();
         itemsAdapter.add(message);
         etNewItem.setText("");
+        writeItems();
     }
 
     private void readItems() {
